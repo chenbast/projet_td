@@ -33,7 +33,7 @@ while True:
         pico_led.off()
         print('ByBye')
         sys.exit()
-    response = requests.get("http://193.48.125.177/etrs403/projet_td/sql/test_pico.php") # Remplacer URL 193.48.125.177*/
+    response = requests.get("http://193.48.125.177/etrs403/projet_td/sql/test_pico.php?nombre=10") # Remplacer URL 193.48.125.177*/
     response_code = response.status_code
     response_content = response.content
     print('Response code: ', response_code)
