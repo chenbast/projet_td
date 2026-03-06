@@ -11,10 +11,18 @@ Coucou : <br>
 <?php
 
 $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
-$sql="SELECT * FROM test";
+
+$sql="SELECT * FROM detection";
 $result = $dbh->query($sql);
 while($row = $result->fetch(PDO::FETCH_ASSOC)){
-	echo $row['nom'];
+	echo'<p>';
+	echo'Numéro de détection : ';
+	echo $row['num_detec'].'<br>';
+	echo'Date et heure de passage : ';
+	echo $row['date'].' à ';
+	echo $row['heure'].'<br>';
+	echo'Type de tag détecté : ';
+	echo'</p>';
 }
 
 // if ($_SERVER["REQUEST_METHOD"] == "GET") {
