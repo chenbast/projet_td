@@ -10,15 +10,20 @@
 Coucou : <br>
 <?php
 
-$dbh = new PDO('mysql:dbname=projet_rfid ;host=localhost ;charset=utf8', 'root', '');
-
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-	if(isset($_GET['nombre'])){
-		$test = $_GET['nombre'];
-		echo $test;
-
-	}
+$dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
+$sql="SELECT * FROM test";
+$result = $dbh->query($sql);
+while($row = $result->fetch(PDO::FETCH_ASSOC)){
+	echo $row['nom'];
 }
+
+// if ($_SERVER["REQUEST_METHOD"] == "GET") {
+// 	if(isset($_GET['nombre'])){
+// 		$test = $_GET['nombre'];
+// 		echo $test;
+
+// 	}
+// }
 ?>
 </body>
 </html>
