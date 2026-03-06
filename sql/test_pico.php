@@ -21,7 +21,9 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'Date et heure de passage : ';
 	echo $row['date'].' à ';
 	echo $row['heure'].'<br>';
-	echo'Type de tag détecté : ';
+	echo'Id du tag détecté : ';
+	echo $row['id_tag'];
+
 	echo'</p>';
 }
 
