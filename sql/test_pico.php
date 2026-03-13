@@ -12,7 +12,7 @@ Coucou : <br>
 
 $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
 
-$sql="SELECT * FROM detection";
+$sql="SELECT * FROM detection d JOIN tag t ON d.id_tag=t.id";
 $result = $dbh->query($sql);
 while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'<p>';
@@ -21,8 +21,8 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'Date et heure de passage : ';
 	echo $row['date'].' à ';
 	echo $row['heure'].'<br>';
-	echo'Id du tag détecté : ';
-	echo $row['id_tag'];
+	echo'Id et type du tag détecté : ';
+	echo $row['id_tag'].' - '.$row['type_tag'];
 
 	echo'</p>';
 }
