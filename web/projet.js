@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    let badges = document.querySelectorAll("span");
+    let badges = document.querySelectorAll(".etat");
 
     function verifierBadge(numero, statut) {
         if (statut === true) {
@@ -11,10 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
             badges[numero].style.color = "red";
         }
     }
-    // Badge 1 valide
-    verifierBadge(0, true);
-
-    // Badge 2 refusé
-    verifierBadge(1, false);
+    verifierBadge(0, true);   // Badge 1 validé
+    verifierBadge(1, false);  // Badge 2 refusé
 }
 );
