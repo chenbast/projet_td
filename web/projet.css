@@ -4,19 +4,19 @@ body{
 
 img{
     width: 20%; 
-    margin-left: 50px;
-    height : auto;
+
 }
 
 h1{
-    margin-left: 1000px;
-    font-size: 800%;
+    font-size: 400%;
+    display : inline;
 }
 
 p{
     font-size: 400%;
 }
 
-span{
-color: darkgreen;
+.flexbox{
+    display: flex;
+    flex-direction : column;
 }
