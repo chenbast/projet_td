@@ -9,14 +9,16 @@ img{
 
 h1{
     font-size: 400%;
-    display : inline;
 }
 
 p{
     font-size: 400%;
 }
 
-.flexbox{
+#mainflex{
     display: flex;
-    flex-direction : column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items:center;
 }
+
