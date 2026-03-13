@@ -4,7 +4,6 @@ body{
 
 img{
     width: 20%; 
-
 }
 
 h1{
@@ -22,3 +21,16 @@ p{
     align-items:center;
 }
 
+#tableBadge{
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    text-align: center;
+}
+
+td, th, table{
+    border-color: black;
+    border: solid;
+}
