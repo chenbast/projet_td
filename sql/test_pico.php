@@ -29,9 +29,20 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 if(isset($_GET['test'])){
 	$texte=$_GET['test'];
 	echo $texte.'<br>';
+	if(isset($_GET['autorisation'])){
+		$auto=$_GET['autorisation'];
+		echo $auto.'<br>';
+		$sql="INSERT INTO test (heure,nom,autorisation) VALUES ('2025-12-12','$texte','$auto')";
+		$dbh->query($sql);
+	}
+	else{
+	$texte=$_GET['test'];
+	echo $texte.'<br>';
 	$sql="INSERT INTO test (heure,nom) VALUES ('2025-12-12','$texte')";
 	$dbh->query($sql);
+	}
 }
+
 
 echo "Affichage de la table test : <br>";
 $sql="SELECT * FROM test";
@@ -43,7 +54,9 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'Date : ';
 	echo $row['heure'].'<br>';
 	echo'Texte : ';
-	echo $row['nom'];
+	echo $row['nom'].'<br>';
+	echo'Autorisation : ';
+	echo $row['autorisation'].'<br>';
 	echo'</p>';
 }
 
