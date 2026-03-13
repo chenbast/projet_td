@@ -23,17 +23,31 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo $row['heure'].'<br>';
 	echo'Id et type du tag détecté : ';
 	echo $row['id_tag'].' - '.$row['type_tag'];
-
 	echo'</p>';
 }
 
-// if ($_SERVER["REQUEST_METHOD"] == "GET") {
-// 	if(isset($_GET['nombre'])){
-// 		$test = $_GET['nombre'];
-// 		echo $test;
+if(isset($_GET['test'])){
+	$texte=$_GET['test'];
+	echo $texte.'<br>';
+	$sql="INSERT INTO test (heure,nom) VALUES ('2025-12-12','$texte')";
+	$dbh->query($sql);
+}
 
-// 	}
-// }
+echo "Affichage de la table test : <br>";
+$sql="SELECT * FROM test";
+$result = $dbh->query($sql);
+while($row = $result->fetch(PDO::FETCH_ASSOC)){
+	echo'<p>';
+	echo'ID : ';
+	echo $row['id'].'<br>';
+	echo'Date : ';
+	echo $row['heure'].'<br>';
+	echo'Texte : ';
+	echo $row['nom'];
+	echo'</p>';
+}
+
+
 ?>
 </body>
 </html>
