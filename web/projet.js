@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-
+    console.log("coucou");
     let badges = document.querySelectorAll(".etat");
-
-    function verifierBadge(numero, statut) {
-        if (statut === true) {
+    
+    function verifierBadge(numero) {
+        let autorisation = badges[numero].getAttribute("autorisation");
+        if (autorisation == "true") {
             badges[numero].textContent = "Validé";
             badges[numero].style.color = "green";
         } else {
@@ -11,9 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
             badges[numero].style.color = "red";
         }
     }
-    for (let i = 0;i< badges.length ;i++)
-    verifierBadge(0, true);   
-    verifierBadge(1, false);  
+    for (let i = 0;i< badges.length; i++)  
+        verifierBadge(i);  
 
 }
 );

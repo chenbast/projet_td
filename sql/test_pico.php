@@ -47,6 +47,7 @@ if(isset($_GET['test'])){
 echo "Affichage de la table test : <br>";
 $sql="SELECT * FROM test";
 $result = $dbh->query($sql);
+date_default_timezone_set('UTC');
 while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'<p>';
 	echo'ID : ';
@@ -58,6 +59,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo'Autorisation : ';
 	echo $row['autorisation'].'<br>';
 	echo'</p>';
+	echo date(DATE_ATOM);
 }
 
 

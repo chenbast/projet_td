@@ -34,7 +34,7 @@
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td class="etat"></td>';
+          echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
           
           echo '<td>'.$row['date'].'</td>';
           
