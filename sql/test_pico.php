@@ -12,57 +12,39 @@ Coucou : <br>
 
 $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
 
-$sql="SELECT * FROM detection d JOIN tag t ON d.id_tag=t.id";
-$result = $dbh->query($sql);
-while($row = $result->fetch(PDO::FETCH_ASSOC)){
-	echo'<p>';
-	echo'Numéro de détection : ';
-	echo $row['num_detec'].'<br>';
-	echo'Date et heure de passage : ';
-	echo $row['date'].' à ';
-	echo $row['heure'].'<br>';
-	echo'Id et type du tag détecté : ';
-	echo $row['id_tag'].' - '.$row['nom'];
-	echo'</p>';
-}
 
-if(isset($_GET['test'])){
-	$texte=$_GET['test'];
-	echo $texte.'<br>';
-	if(isset($_GET['autorisation'])){
-		$auto=$_GET['autorisation'];
-		echo $auto.'<br>';
-		$sql="INSERT INTO test (heure,nom,autorisation) VALUES ('2025-12-12','$texte','$auto')";
+if(isset($_GET['uid'])&&isset($_GET['nom'])&&isset($_GET['pin'])){
+	$uid=$_GET['uid'];
+	$nom=$_GET['nom'];
+	$pin=$_GET['pin'];
+	$date=date("Y-n-j");
+	$heure=date("H:i:s");
+
+	$sql="INSERT INTO test (heure,nom,uid,pin) VALUES ('$date','$nom','$uid','$pin')";
+	$dbh->query($sql);
+
+	$sql="SELECT * FROM tag WHERE id='$uid'";
+	$result=$dbh->query($sql);
+	if ($result->rowCount() == 0){
+		echo'nouveau tag detecte';
+		$sql="INSERT INTO tag (id,nom,pin) VALUES ('$uid','$nom','$pin')";
 		$dbh->query($sql);
 	}
-	else{
-	$texte=$_GET['test'];
-	echo $texte.'<br>';
-	$sql="INSERT INTO test (heure,nom) VALUES ('2025-12-12','$texte')";
-	$dbh->query($sql);
+
+	$sql="SELECT pin FROM tag WHERE id='$uid'";
+	$result=$dbh->query($sql);
+	while($row=$result->fetch(PDO::FETCH_ASSOC)){
+		$pin_valide=$row['pin'];
 	}
+	if($pin_valide==$pin){
+		$sql="INSERT INTO detection (date,heure,id_tag,autorisation) VALUES ('$date','$heure','$uid','true')";
+	}
+	else{
+		$sql="INSERT INTO detection (date,heure,id_tag,autorisation) VALUES ('$date','$heure','$uid','false')";
+	}
+	$result=$dbh->query($sql);
+
 }
-
-
-echo "Affichage de la table test : <br>";
-$sql="SELECT * FROM test";
-$result = $dbh->query($sql);
-date_default_timezone_set('UTC');
-while($row = $result->fetch(PDO::FETCH_ASSOC)){
-	echo'<p>';
-	echo'ID : ';
-	echo $row['id'].'<br>';
-	echo'Date : ';
-	echo $row['heure'].'<br>';
-	echo'Texte : ';
-	echo $row['nom'].'<br>';
-	echo'Autorisation : ';
-	echo $row['autorisation'].'<br>';
-	echo'</p>';
-	echo date(DATE_ATOM);
-}
-
-
 ?>
 </body>
 </html>
