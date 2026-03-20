@@ -22,7 +22,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC)){
 	echo $row['date'].' à ';
 	echo $row['heure'].'<br>';
 	echo'Id et type du tag détecté : ';
-	echo $row['id_tag'].' - '.$row['type_tag'];
+	echo $row['id_tag'].' - '.$row['nom'];
 	echo'</p>';
 }
 

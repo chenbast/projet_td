@@ -12,16 +12,16 @@
       <h1> Projet RFID</h1>
       <img src="images\rfid.png" alt="sticker rfid2">
     </div>
-    <br>
+
     <table id="tableBadges">
         <thead>
           <tr>
             <th>Numéro de détection</th>
             <th>État du badge</th>
-            <th>Date de détéction</th></the>
+            <th>Date de détection</th></the>
             <th>Heure de détection</th>
             <th>ID Badge</th>
-            <th>propriétaire</th>
+            <th>Propriétaire</th>
           </tr>
         </thead>
 
@@ -42,7 +42,7 @@
 
           echo '<td>'.$row['id_tag'].'</td>';
           
-          echo '<td>'.$row['type_tag'].'</td></tr>';
+          echo '<td>'.$row['nom'].'</td></tr>';
         }      
         ?>       
         </tbody>

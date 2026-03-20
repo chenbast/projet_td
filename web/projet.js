@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
             badges[numero].style.color = "red";
         }
     }
-    verifierBadge(0, true);   // Badge 1 validé
-    verifierBadge(1, false);  // Badge 2 refusé
+    for (let i = 0;i< badges.length ;i++)
+    verifierBadge(0, true);   
+    verifierBadge(1, false);  
+
 }
 );
