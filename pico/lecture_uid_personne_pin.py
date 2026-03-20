@@ -86,7 +86,10 @@ while True:
                         print("Accès refusé")
 
             print("Retirez la carte...")
-
+            print(name)
+            print(uid_str)
+            print(pin)
+            break
             while True:
                 stat_check, _ = rc522.request(rc522.REQIDL)
                 if stat_check != rc522.OK:
