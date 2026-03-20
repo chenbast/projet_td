@@ -11,7 +11,7 @@ import sys
 ssid = 'wifirpi'
 password = '88E4VB1YQBI15TM4UCK9KP1LWQ'
 def connect():
-    #Connect to WLAN
+    
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(ssid, password)
@@ -35,7 +35,7 @@ print ('Connected - press BOOTSEL to quit')
 def uidToString(uid):
     return ''.join("%02X" % i for i in uid)
 
-# Initialisation du lecteur (SPI pins selon ta config)
+
 rc522 = MFRC522(spi_id=0, sck=6, miso=4, mosi=7, cs=5, rst=3)
 
 print("Placez une carte RFID pres du lecteur.")
@@ -49,7 +49,7 @@ while True:
         (stat, uid) = rc522.SelectTagSN()
 
         if stat == rc522.OK:
-            rfid_data = uidToString(uid)  # <-- stockage de l'UID
+            rfid_data = uidToString(uid)  # stockage de l'UID
             print("Contenu de rfid_data :", rfid_data)
             break
             # Lecture optionnelle des données dans le bloc 8

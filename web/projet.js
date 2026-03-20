@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("coucou");
     let badges = document.querySelectorAll(".etat");
     
     function verifierBadge(numero) {
