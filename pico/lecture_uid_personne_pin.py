@@ -9,9 +9,9 @@ led1 = Pin(13, Pin.OUT)  # led rouge pin
 led2 = Pin(14, Pin.OUT)  # led jaune pin
 led3 = Pin(15, Pin.OUT)  # led vert pin
 
-led1.value(0)
-led3.value(0)
-led2.value(1)
+led1.value(0) # éteinds la LED rouge
+led3.value(0) # éteinds la LED verte
+led2.value(1) # allume la LED jaune
 
 def load_users():
     try:
@@ -38,6 +38,36 @@ def ask_pin():
 
 print("Approchez une carte RFID...\n")
 
+
+def add_user(uid):
+    print("Nouveau badge")
+
+    
+    if uid in users:
+        print("Badge déjà enregistré !")
+        return
+
+    name = input("Prénom et nom : ").strip()
+    pin = ask_pin()
+
+    
+    users[uid] = {
+        "name": name,
+        "pin": pin
+    }
+
+    
+    with open("users.json", "w") as f:
+        json.dump(users, f)
+
+    print("Badge enregistré")
+
+    led2.value(0) # éteinds la LED jaune
+    led3.value(1) # allume la LED verte
+    time.sleep(1) 
+    led3.value(0) # éteinds la LED verte
+    led2.value(1) # allume la LED jaune
+
 last_uid = None
 
 
@@ -61,7 +91,7 @@ while True:
 
            
             if uid_str not in users:
-                print("Badge inconnu")
+                add_user(uid_str)
 
             else:
                 user = users[uid_str]

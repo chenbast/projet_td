@@ -4,7 +4,7 @@ from utime import sleep
 import json
 import network
 import socket
-from time import sleep
+import time
 from picozero import pico_temp_sensor, pico_led
 import machine
 import rp2
@@ -71,6 +71,52 @@ def ask_pin():
 
 print("Approchez une carte RFID...\n")
 
+def add_user(uid):
+    print("Nouveau badge")
+
+    
+    if uid in users:
+        print("Badge déjà enregistré !")
+        return
+
+    name = input("Nom : ").strip()
+    pin = ask_pin()
+
+    
+    users[uid] = {
+        "name": name,
+        "pin": pin
+    }
+
+    
+    with open("users.json", "w") as f:
+        json.dump(users, f)
+
+    print("Badge enregistré")
+
+    led2.value(0)
+    led3.value(1)
+    time.sleep(1)
+    led3.value(0)
+    led2.value(1)
+    
+    nom=""
+    for c in name:
+        if c==" ":
+            nom+="_"
+        else:
+            nom+=c
+    print(uid)
+    print(pin)
+    print(nom)
+    response = requests.get(
+    "http://193.48.125.177/etrs403/projet_td/web/communication/comm_pico.php?uid="+uid+"&nom="+nom+"&pin="+pin) # Remplacer URL 193.48.125.177*/
+    response_code = response.status_code
+    response_content = response.content
+    print('Response code: ', response_code)
+    print('Response content:', response_content)
+
+
 last_uid = None
 name=""
 nom=""
@@ -94,8 +140,9 @@ while True:
 
            
             if uid_str not in users:
-                print("Badge inconnu")
-
+                add_user(uid_str)
+                print('Au revoir')
+                break
             else:
                 user = users[uid_str]
 
@@ -150,7 +197,7 @@ while True:
             print(pin_input)
             print(nom)
             response = requests.get(
-            "http://193.48.125.177/etrs403/projet_td/sql/test_pico.php?uid="+uid_str+"&nom="+nom+"&pin="+pin_input) # Remplacer URL 193.48.125.177*/
+            "http://193.48.125.177/etrs403/projet_td/web/communication/comm_pico.php?uid="+uid_str+"&nom="+nom+"&pin="+pin_input) # Remplacer URL 193.48.125.177*/
             response_code = response.status_code
             response_content = response.content
             print('Response code: ', response_code)
