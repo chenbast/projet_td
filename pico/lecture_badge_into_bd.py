@@ -41,6 +41,13 @@ print ('Connected - press BOOTSEL to quit')
 
 rc522 = MFRC522(spi_id=0, sck=6, miso=4, mosi=7, cs=5, rst=3)
 
+led1 = Pin(13, Pin.OUT)  # led rouge pin
+led2 = Pin(14, Pin.OUT)  # led jaune pin
+led3 = Pin(15, Pin.OUT)  # led vert pin
+
+led1.value(0)
+led3.value(0)
+led2.value(1)
 def load_users():
     try:
         with open("users.json", "r") as f:
@@ -105,6 +112,9 @@ while True:
                 # PIN OBLIGATOIRE 
                 if not pin:
                     print("Aucun PIN enregistré : accès refusé")
+                    led1.value(1)  # allume la LED rouge
+                    led2.value(0)  # éteinds la LED jaune
+                    time.sleep(1)
                 else:
                     attempts = 0
                     ok = False
@@ -115,6 +125,9 @@ while True:
                         if pin_input == pin:
                             print("Accès autorisé")
                             ok = True
+                            led3.value(1)  # allume la LED verte
+                            led2.value(0)  # éteinds la LED jaune
+                            time.sleep(1)
                             break
                         else:
                             attempts += 1
@@ -122,6 +135,9 @@ while True:
 
                     if not ok:
                         print("Accès refusé")
+                        led1.value(1)  # allume la LED rouge
+                        led2.value(0)  # éteinds la LED jaune
+                        time.sleep(1)
 
             print("Retirez la carte...")
             nom=""

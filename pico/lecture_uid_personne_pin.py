@@ -2,8 +2,16 @@ from mfrc522 import MFRC522
 from machine import Pin
 from utime import sleep
 import json
+import time
 
 rc522 = MFRC522(spi_id=0, sck=6, miso=4, mosi=7, cs=5, rst=3)
+led1 = Pin(13, Pin.OUT)  # led rouge pin
+led2 = Pin(14, Pin.OUT)  # led jaune pin
+led3 = Pin(15, Pin.OUT)  # led vert pin
+
+led1.value(0)
+led3.value(0)
+led2.value(1)
 
 def load_users():
     try:
@@ -14,6 +22,8 @@ def load_users():
 
 users = load_users()
 
+    
+    
 def uid_to_string(uid):
     return "".join("%02X" % b for b in uid)
 
@@ -30,7 +40,9 @@ print("Approchez une carte RFID...\n")
 
 last_uid = None
 
+
 while True:
+    
     stat, _ = rc522.request(rc522.REQIDL)
 
     if stat == rc522.OK:
@@ -54,7 +66,7 @@ while True:
             else:
                 user = users[uid_str]
 
-               
+                
                 if isinstance(user, dict):
                     name = user.get("name", "Utilisateur")
                     pin = user.get("pin", "")
@@ -67,6 +79,9 @@ while True:
                 # PIN OBLIGATOIRE 
                 if not pin:
                     print("Aucun PIN enregistré : accès refusé")
+                    led1.value(1)  # allume la LED rouge
+                    led2.value(0)  # éteinds la LED jaune
+                    time.sleep(1)
                 else:
                     attempts = 0
                     ok = False
@@ -77,6 +92,9 @@ while True:
                         if pin_input == pin:
                             print("Accès autorisé")
                             ok = True
+                            led3.value(1)  # allume la LED verte
+                            led2.value(0)  # éteinds la LED jaune
+                            time.sleep(1)
                             break
                         else:
                             attempts += 1
@@ -84,12 +102,12 @@ while True:
 
                     if not ok:
                         print("Accès refusé")
+                        led1.value(1)  # allume la LED rouge
+                        led2.value(0)  # éteinds la LED jaune
+                        time.sleep(1)
 
             print("Retirez la carte...")
-            print(name)
-            print(uid_str)
-            print(pin)
-            break
+
             while True:
                 stat_check, _ = rc522.request(rc522.REQIDL)
                 if stat_check != rc522.OK:
