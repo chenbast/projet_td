@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Projet RFID</title>
-    <link rel="stylesheet" href="projet.css">
-  </head>
-  <body>
-  <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
+    <head>
+        <meta charset="utf-8">
+        <title>Visualisation Date</title>
+        <link rel="stylesheet" href="projet.css">
+    </head>
+    <body>
+    <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
     <nav id="navigation">
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
@@ -14,13 +14,13 @@
     </nav>
 
     <div id="pageflex">
+    <h1>Date</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
-
-    <table id="tableBadges">
+        <table id="tableBadges">
         <thead>
           <tr>
             <th>Numéro de détection</th>
@@ -29,18 +29,18 @@
             <th>Heure de détection</th>
             <th>ID Badge</th>
             <th>Propriétaire</th>
+            <th>Détails</th>
           </tr>
         </thead>
-        <tbody>
-
-        <?php
-        
-        if(isset($_GET['num_detec'])){
-            $id=$_GET['num_detec'];
-            $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
-            $sql="SELECT * FROM detection d JOIN tag t ON d.id_tag=t.id WHERE d.num_detec=$id";
+    <?php
+            $date1=$_POST['date1'];
+            $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
+            $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE date = ';
+            $sql = $sql."'".$date1."'";
             $result = $dbh->query($sql);
+            echo "numéros de détéction de la date ".$date1." : <br><br>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
+
                 echo'<tr><td>'.$row['num_detec'].'</td>';
           
                 echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
@@ -48,19 +48,19 @@
                 echo '<td>'.$row['date'].'</td>';
                 
                 echo '<td>'.$row['heure'].'</td>';
-      
+
                 echo '<td>'.$row['id_tag'].'</td>';
                 
                 echo '<td>'.$row['nom'].'</td>';
-      
-                echo '</tr>';
-            }
-        }
-        ?>
-        </tbody>
 
-    </table>
-    </div>
+                echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
+
+                echo '</tr>';
+
+            }
+
+        ?>
     </body>
+    </div>
     <script src="projet.js"></script>
 </html>

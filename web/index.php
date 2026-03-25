@@ -8,11 +8,13 @@
   <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
     <nav id="navigation">
-    <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
+      <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
+      <a href="index.php">Accueil</a>
       <a href="stats.php">Stats</a>
     </nav>
 
     <div id="pageflex">
+    <h1>Accueil</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
