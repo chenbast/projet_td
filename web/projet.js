@@ -12,6 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     for (let i = 0;i< badges.length; i++)  
-        verifierBadge(i);  
+        verifierBadge(i);
 }
 );
