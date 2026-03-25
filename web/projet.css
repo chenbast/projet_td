@@ -39,3 +39,18 @@ td, th, table{
 td, th{
     padding:5px;
 }
+a{
+    text-decoration:none;
+    font-size:100%;
+    color:black;
+    font-weight: bold;
+}
+a:hover{
+    color:rgb(0, 20, 204);
+    font-weight: bold;
+}
+a:active{
+    color:rgb(0, 20, 204);
+    text-decoration: underline;
+    font-weight: bold;
+}
