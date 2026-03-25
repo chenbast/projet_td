@@ -71,6 +71,19 @@ def ask_pin():
 
 print("Approchez une carte RFID...\n")
 
+def iso_to_timestamp(iso_str):
+    # "YYYY-MM-DDTHH:MM:SS"
+    try:
+        y = int(iso_str[0:4])
+        m = int(iso_str[5:7])
+        d = int(iso_str[8:10])
+        h = int(iso_str[11:13])
+        mi = int(iso_str[14:16])
+        s = int(iso_str[17:19])
+        return int(time.mktime((y, m, d, h, mi, s, 0, 0)))
+    except:
+        return None
+
 def add_user(uid):
     print("Nouveau badge")
 
@@ -82,10 +95,16 @@ def add_user(uid):
     name = input("Nom : ").strip()
     pin = ask_pin()
 
+    valid_input = input("Date d'expiration (YYYY-MM-DDTHH:MM:SS) ou laisser vide : ").strip()
+    if valid_input:
+        valid_until = valid_input  # stocker au format ISO
+    else:
+        valid_until = None
     
     users[uid] = {
         "name": name,
-        "pin": pin
+        "pin": pin,
+        "valid_until": valid_until
     }
 
     
@@ -147,14 +166,21 @@ while True:
                 user = users[uid_str]
 
                
-                if isinstance(user, dict):
-                    name = user.get("name", "Utilisateur")
-                    pin = user.get("pin", "")
-                else:
-                    name = user
-                    pin = ""
+                name = user.get("name", "Utilisateur")
+                pin = user.get("pin", "")
+                valid_until = user.get("valid_until", None)
 
                 print("Utilisateur :", name)
+
+                # Vérification expiration
+                valid_ts = iso_to_timestamp(valid_until) if valid_until else None
+                if valid_ts is not None and time.time() > valid_ts:
+                    print("Badge expiré ! Accès refusé")
+                    led1.value(1)
+                    led2.value(0)
+                    time.sleep(1)
+                    last_uid = None
+                    continue
 
                 # PIN OBLIGATOIRE 
                 if not pin:
