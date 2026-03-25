@@ -1,13 +1,16 @@
+*{
+    margin:0px;
+}
 body{
     background-color : lightblue;
-    display: flex;
     height:100vh;
-    justify-content: flex-start;
-    flex-direction:column;
-    align-items:center;
+}
+.icons{
+    width:40px;
+    margin:5px;
 }
 
-img{
+.img_rfid{
     width: 20%; 
 }
 
@@ -18,7 +21,13 @@ h1{
 p{
     font-size: 400%;
 }
-
+#pageflex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
+    padding:50px;
+}
 #mainflex{
     display: flex;
     flex-direction: row;
@@ -53,4 +62,15 @@ a:active{
     color:rgb(0, 20, 204);
     text-decoration: underline;
     font-weight: bold;
+}
+nav{
+    width:0px;
+    position:fixed;
+    height:100%;
+    z-index:1;
+    top:0;
+    left:0;
+    background-color: rgb(105, 205, 238);
+    overflow-x: hidden;
+    transition:0.5s;
 }

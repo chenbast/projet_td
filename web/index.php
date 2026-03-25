@@ -6,10 +6,17 @@
     <link rel="stylesheet" href="projet.css">
   </head>
   <body>
+    <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
+    <nav id="navigation">
+    <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
+      <a href="stats.php">Stats</a>
+    </nav>
+
+    <div id="pageflex">
     <div id="mainflex">
-      <img src="images\rfid.png" alt="sticker rfid1">
+      <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
-      <img src="images\rfid.png" alt="sticker rfid2">
+      <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
 
     <table id="tableBadges">
@@ -52,7 +59,7 @@
         </tbody>
 
     </table>
-
+    </div>
     </body>
     <script src="projet.js"></script>
 </html>
