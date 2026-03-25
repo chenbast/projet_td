@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Projet RFID</title>
     <link rel="stylesheet" href="projet.css">
-    <script src="projet.js"></script>
   </head>
   <body>
     <div id="mainflex">
@@ -22,6 +21,7 @@
             <th>Heure de détection</th>
             <th>ID Badge</th>
             <th>Propriétaire</th>
+            <th>Détails</th>
           </tr>
         </thead>
 
@@ -42,7 +42,11 @@
 
           echo '<td>'.$row['id_tag'].'</td>';
           
-          echo '<td>'.$row['nom'].'</td></tr>';
+          echo '<td>'.$row['nom'].'</td>';
+
+          echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
+
+          echo '</tr>';
         }      
         ?>       
         </tbody>
@@ -50,4 +54,5 @@
     </table>
 
     </body>
+    <script src="projet.js"></script>
 </html>
