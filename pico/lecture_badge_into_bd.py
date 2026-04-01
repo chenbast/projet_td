@@ -41,9 +41,9 @@ print ('Connected - press BOOTSEL to quit')
 
 rc522 = MFRC522(spi_id=0, sck=6, miso=4, mosi=7, cs=5, rst=3)
 
-led1 = Pin(13, Pin.OUT)  # led rouge pin
-led2 = Pin(14, Pin.OUT)  # led jaune pin
-led3 = Pin(15, Pin.OUT)  # led vert pin
+led1 = Pin(13, Pin.OUT)  # led rouge
+led2 = Pin(14, Pin.OUT)  # led jaune
+led3 = Pin(15, Pin.OUT)  # led vert
 
 led1.value(0)
 led3.value(0)
@@ -82,7 +82,36 @@ def iso_to_timestamp(date_str):
     except:
         return None
 
+ADMIN_UID = "B3F28D1A" # Carte blanche : admin Elsa
 def add_user(uid):
+
+    rint("Pour enregistrer ce nouveau badge, badgez d'abord avec le badge ADMIN...")
+    led1.value(0)
+    led2.value(1)
+    led3.value(0)
+
+    admin_verified = False
+    while not admin_verified:
+        stat, _ = rc522.request(rc522.REQIDL)
+        if stat == rc522.OK:
+            stat, admin_uid_bytes = rc522.SelectTagSN()
+            if stat == rc522.OK:
+                admin_uid_str = uid_to_string(admin_uid_bytes)
+                if admin_uid_str == ADMIN_UID:
+                    admin_verified = True
+                    print("Admin reconnu !")
+                    led2.value(0)
+                    led3.value(1)
+                    sleep(3)
+                    led3.value(0)
+                    led2.value(1)
+                else:
+                    print("Badge non autorisé pour ajout !")
+                    led1.value(1)
+                    sleep(2)
+                    led1.value(0)
+        sleep(0.2)
+
     print("Nouveau badge")
     led1.value(0)
     led2.value(1)
@@ -93,7 +122,7 @@ def add_user(uid):
         print("Badge déjà enregistré !")
         return
 
-    name = input("Nom : ").strip()
+    name = input("Prénom et nom : ").strip()
     pin = ask_pin()
 
     rep = input("Ajouter une date d'expiration ? (o/n) : ").strip().lower()
@@ -175,7 +204,7 @@ while True:
 
                 print("Utilisateur :", name)
 
-                # EXPIRATION et SUPPRESSION
+                # Expiration et suppression
                 valid_ts = iso_to_timestamp(valid_until) if valid_until else None
 
                 if valid_ts and time.time() > valid_ts:
@@ -226,8 +255,8 @@ while True:
 
                     if not ok:
                         print("Accès refusé")
-                        led1.value(1)  # allume la LED rouge
-                        led2.value(0)  # éteinds la LED jaune
+                        led1.value(1)
+                        led2.value(0)
                         time.sleep(1)
 
             else:
