@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -57,7 +67,7 @@
 
           echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
-          echo '<td><a href="modifier.php"><img height=20 src="images/stylo.png"></a>';
+          echo '<td><a href="modifier.php?id='.$row['num_detec'].'"><img height=20 src="images/stylo.png"></a>';
 
           echo '<a href="supprimer_ligne.php?id='.$row['num_detec'].'"><img height=20 src="images/croix-rouge.png"></a></td>';
 

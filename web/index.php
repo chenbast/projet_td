@@ -11,7 +11,7 @@
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Stats</a>
-      <a href="connexion.php">Espace admin</a>
+      <a href="espace_admin.php">Espace admin</a>
     </nav>
 
     <div id="pageflex">
