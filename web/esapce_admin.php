@@ -56,6 +56,8 @@
 
           echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
+          echo ''
+
           echo '</tr>';
         }      
         ?>       
