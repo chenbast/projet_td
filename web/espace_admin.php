@@ -3,7 +3,7 @@ session_start();
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: connexion.php');
     exit;
 }
 
@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_id'])) {
     </nav>
 
     <div id="pageflex">
-    <h1>Admin</h1>
+    <h1>Espace admin</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
