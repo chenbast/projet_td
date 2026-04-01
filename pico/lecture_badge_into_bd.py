@@ -71,21 +71,22 @@ def ask_pin():
 
 print("Approchez une carte RFID...\n")
 
-def iso_to_timestamp(iso_str):
-    # "YYYY-MM-DDTHH:MM:SS"
+def iso_to_timestamp(date_str):
     try:
-        y = int(iso_str[0:4])
-        m = int(iso_str[5:7])
-        d = int(iso_str[8:10])
-        h = int(iso_str[11:13])
-        mi = int(iso_str[14:16])
-        s = int(iso_str[17:19])
-        return int(time.mktime((y, m, d, h, mi, s, 0, 0)))
+        d = int(date_str[0:2])
+        m = int(date_str[3:5])
+        y = int(date_str[6:10])
+        h = int(date_str[11:13])
+        mi = int(date_str[14:16])
+        return int(time.mktime((y, m, d, h, mi, 0, 0, 0)))
     except:
         return None
 
 def add_user(uid):
     print("Nouveau badge")
+    led1.value(0)
+    led2.value(1)
+    led3.value(0)
 
     
     if uid in users:
@@ -95,9 +96,16 @@ def add_user(uid):
     name = input("Nom : ").strip()
     pin = ask_pin()
 
-    valid_input = input("Date d'expiration (YYYY-MM-DDTHH:MM:SS) ou laisser vide : ").strip()
-    if valid_input:
-        valid_until = valid_input  # stocker au format ISO
+    rep = input("Ajouter une date d'expiration ? (o/n) : ").strip().lower()
+
+    if rep == "o":
+        while True:
+            valid_input = input("Expiration (JJ/MM/AAAA HH:MM) : ").strip()
+            if iso_to_timestamp(valid_input):
+                valid_until = valid_input
+                break
+            else:
+                print("Format invalide")
     else:
         valid_until = None
     
@@ -115,7 +123,7 @@ def add_user(uid):
 
     led2.value(0)
     led3.value(1)
-    time.sleep(1)
+    time.sleep(3)
     led3.value(0)
     led2.value(1)
     
@@ -135,7 +143,8 @@ def add_user(uid):
     print('Response code: ', response_code)
     print('Response content:', response_content)
 
-
+print("Approchez une carte RFID...\n")
+led2.value(1)
 last_uid = None
 name=""
 nom=""
@@ -154,57 +163,66 @@ while True:
                 continue
 
             last_uid = uid_str
-
             print("\nCarte détectée :", uid_str)
 
-           
-            if uid_str not in users:
-                add_user(uid_str)
-                print('Au revoir')
-                break
-            else:
-                user = users[uid_str]
 
-               
+            if uid_str in users:
+
+                user = users[uid_str]
                 name = user.get("name", "Utilisateur")
                 pin = user.get("pin", "")
-                valid_until = user.get("valid_until", None)
+                valid_until = user.get("valid_until")
 
                 print("Utilisateur :", name)
 
-                # Vérification expiration
+                # EXPIRATION et SUPPRESSION
                 valid_ts = iso_to_timestamp(valid_until) if valid_until else None
-                if valid_ts is not None and time.time() > valid_ts:
-                    print("Badge expiré ! Accès refusé")
+
+                if valid_ts and time.time() > valid_ts:
+                    print("Badge expiré ! Suppression...")
+
                     led1.value(1)
                     led2.value(0)
+                    time.sleep(1)
+
+                    # Suppression
+                    del users[uid_str]
+
+                    with open("users.json", "w") as f:
+                        json.dump(users, f)
+
+                    print("Badge supprimé du système")
+
+                
+                    rep = input("Réenregistrer ce badge ? (o/n) : ")
+                    if rep.lower() == "o":
+                        add_user(uid_str)
+                    led1.value(0)
+                    led2.value(1)
                     time.sleep(1)
                     last_uid = None
                     continue
 
-                # PIN OBLIGATOIRE 
+               
                 if not pin:
-                    print("Aucun PIN enregistré : accès refusé")
-                    led1.value(1)  # allume la LED rouge
-                    led2.value(0)  # éteinds la LED jaune
+                    print("Pas de PIN")
+                    led1.value(1)
+                    led2.value(0)
                     time.sleep(1)
+
                 else:
-                    attempts = 0
                     ok = False
-
-                    while attempts < 3:
+                    for i in range(3):
                         pin_input = ask_pin()
-
                         if pin_input == pin:
                             print("Accès autorisé")
+                            led3.value(1)
+                            led2.value(0)
+                            time.sleep(3)
                             ok = True
-                            led3.value(1)  # allume la LED verte
-                            led2.value(0)  # éteinds la LED jaune
-                            time.sleep(1)
                             break
                         else:
-                            attempts += 1
-                            print("PIN incorrect ({}/3)".format(attempts))
+                            print(f"Erreur ({i+1}/3)")
 
                     if not ok:
                         print("Accès refusé")
@@ -212,7 +230,19 @@ while True:
                         led2.value(0)  # éteinds la LED jaune
                         time.sleep(1)
 
+            else:
+                print("Badge inconnu")
+                add_user(uid_str)
+
             print("Retirez la carte...")
+            led1.value(0)
+            led2.value(1)
+            led3.value(0)
+
+            
+
+            last_uid = None
+
             nom=""
             for c in name:
                 if c==" ":
@@ -228,6 +258,12 @@ while True:
             response_content = response.content
             print('Response code: ', response_code)
             print('Response content:', response_content)
+
+            while True:
+                stat, _ = rc522.request(rc522.REQIDL)
+                if stat != rc522.OK:
+                    break
+                sleep(0.1)
             break
 
     sleep(0.2)
