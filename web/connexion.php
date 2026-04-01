@@ -5,16 +5,17 @@ $message = '';
 if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
     $username = $_POST['identifiant'];
     $password = $_POST['mdp'];
-
-    $sql = "SELECT * FROM utilisateurs WHERE id = $username";
-    $message = $username;
-
-    if ($user && password_verify($password, $user['mdp'])) {
-        session_start();
-        $_SESSION['user_id'] = $user['id'];
-        header('Location: espace_admin.php');
-    } else {
-        $message = 'Mauvais identifiants';
+    echo $username;
+    $sql = "SELECT * FROM utilisateurs WHERE id = '$username'";
+    $result = $dbh->query($sql);
+    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        if($username==$row['id'] && $password==$row['mdp']){
+            session_start();
+            $_SESSION['user_id'] = $row['id'];
+            header('Location: espace_admin.php');
+        } else {
+            $message = 'Mauvais identifiants';
+        }
     }
 }
 ?>
