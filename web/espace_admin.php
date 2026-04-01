@@ -16,15 +16,9 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="projet.css">
   </head>
   <body>
-    <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
-      <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
-      <a href="index.php">Accueil</a>
-      <a href="stats.php">Stats</a>
-      <a href="connexion.php">Espace admin</a>
-    </nav>
 
     <div id="pageflex">
+    <a href="deconnexion.php">Se déconnecter</a>
     <h1>Espace admin</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
