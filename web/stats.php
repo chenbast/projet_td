@@ -23,16 +23,38 @@
     
         <form method="post" action="date.php" enctype="multipart/form-data">
         <p>
-            <label for="date1">Entrez une date pour voir qui a badgé un badge sur le lecteur de badge à cette date</label>
+            <label for="date1">Rechercher par date :</label>
             <br>
             <input type="date" name="date1" id="date1">
         </p>
         <p>
-	        <input type="submit" value="rechercher une date">
+	        <input type="submit" value="Rechercher">
+        </p>
+        </form>
+        
+        <form method="post" action="nom.php" enctype="multipart/form-data">
+        <p>
+            <label for="nom">Rechercher par nom :</label>
+            <br>
+            <select name="nom" id="nom">
+                <?php
+                $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
+
+                $sql="SELECT nom FROM tag";
+                $result = $dbh->query($sql);
+                while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    echo '<option value="'.$row['nom'].'">'.$row['nom'].'</option>';
+                }
+                ?>
+            </select>
+
+        </p>
+        <p>
+	        <input type="submit" value="Rechercher">
         </p>
   
-    </form>
-</div>
+        </form>
+    </div>
     </body>
     <script src="projet.js"></script>
 </html>

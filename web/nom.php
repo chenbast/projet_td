@@ -17,7 +17,7 @@
     <div id="pageflex">
       
     <?php
-      echo '<h1>'.$_POST['date1'].'</h1>';
+      echo '<h1>Détection de '.$_POST['nom'].'</h1>';
     ?>
     
     <div id="mainflex">
@@ -37,12 +37,12 @@
           </tr>
         </thead>
     <?php
-            $date1=$_POST['date1'];
+            $nom=$_POST['nom'];
             $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
-            $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE date = ';
-            $sql = $sql."'".$date1."'";
+            $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE nom = ';
+            $sql = $sql."'".$nom."'";
             $result = $dbh->query($sql);
-            echo "Détections lors de la date ".$date1." : <br><br>";
+            echo "Détections du badge de ".$nom." : <br><br>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
           
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
