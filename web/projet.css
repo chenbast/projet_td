@@ -80,3 +80,8 @@ nav{
 nav>a{
     margin:5px;
 }
+.flex_horizontal{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}

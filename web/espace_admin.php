@@ -15,7 +15,7 @@
     </nav>
 
     <div id="pageflex">
-    <h1>Accueil</h1>
+    <h1>Admin</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
@@ -32,6 +32,7 @@
             <th>ID Badge</th>
             <th>Propriétaire</th>
             <th>Détails</th>
+            <th>Editer/supprimer</th>
           </tr>
         </thead>
 
@@ -56,7 +57,9 @@
 
           echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
-          echo ''
+          echo '<td><a href="modifier.php"><img height=20 src="images/stylo.png"></a>';
+
+          echo '<a href="supprimer_ligne.php?id='.$row['num_detec'].'"><img height=20 src="images/croix-rouge.png"></a></td>';
 
           echo '</tr>';
         }      
