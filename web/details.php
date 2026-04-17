@@ -10,7 +10,7 @@
     <nav id="navigation">
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
-      <a href="stats.php">Stats</a>
+      <a href="stats.php">Rechercher</a>
     </nav>
 
     <div id="pageflex">
