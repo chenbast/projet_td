@@ -130,3 +130,8 @@ select::picker(select) {
     border-radius:15px;
     background-color: rgb(85, 175, 175);
 }
+.connex{
+    padding:5px;
+    border: 3px solid rgb(4, 155, 224);
+    border-radius:15px;
+}

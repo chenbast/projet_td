@@ -12,8 +12,8 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
             session_start();
             $_SESSION['user_id'] = $row['id'];
             header('Location: espace_admin.php');
-        } else {
-            $message = 'Mauvais identifiants';
+        } else{
+            $message = 'Mauvais identifiant ou mot de passe';
         }
     }
 }
@@ -37,9 +37,11 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
 
     <div id="pageflex">
     <h1>Connexion</h1>
+
     <?php if (!empty($message)): ?>
         <p style="color:red"><?= $message ?></p>
     <?php endif; ?>
+
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
@@ -48,11 +50,11 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
 
     <form class="flex_horizontal" method="post" action="connexion.php" enctype="multipart/form-data">
     <label for="identifiant">Identifiant :</label>
-    <input type="text" name="identifiant" id="identifiant">
+    <input class="connex" type="text" name="identifiant" id="identifiant">
     <label for="mdp">Mot de passe : </label>
-    <input type="password" name="mdp" id="mdp">
+    <input class="connex" type="password" name="mdp" id="mdp">
     <br>
-    <input type="submit" value="Exécuter">
+    <input class="connex" type="submit" value="Connexion">
     </form>
 
 
