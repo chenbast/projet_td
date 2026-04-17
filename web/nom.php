@@ -37,12 +37,13 @@
           </tr>
         </thead>
     <?php
+    echo '<div class="flex_horizontal"';
             $nom=$_POST['nom'];
             $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
             $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE nom = ';
             $sql = $sql."'".$nom."'";
             $result = $dbh->query($sql);
-            echo "Détections du badge de ".$nom." : <br><br>";
+            echo "<p>Détections du badge de ".$nom." : <br><br></p>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
           
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
@@ -60,7 +61,7 @@
             }
             
             echo'<img height=80 src="images/fleche_retour.png">
-            <a href="index.php">Retour</a> ';
+            <a href="stats.php">Retour</a></div>';
 
         ?>
     </body>

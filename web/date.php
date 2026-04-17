@@ -61,7 +61,7 @@
 
         ?>
         <img height=80 src="images/fleche_retour.png">
-        <a href="index.php">Retour</a> 
+        <a href="stats.php">Retour</a> 
     </body>
     </div>
     <script src="projet.js"></script>
