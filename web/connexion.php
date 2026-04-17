@@ -5,7 +5,6 @@ $message = '';
 if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
     $username = $_POST['identifiant'];
     $password = $_POST['mdp'];
-    echo $username;
     $sql = "SELECT * FROM utilisateurs WHERE id = '$username'";
     $result = $dbh->query($sql);
     while($row = $result->fetch(PDO::FETCH_ASSOC)){

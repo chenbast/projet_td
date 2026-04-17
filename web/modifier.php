@@ -41,7 +41,18 @@
 
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td> <span class="etat" autorisation="'.$row['autorisation'].'"></span><select name="autorisation"><option class="etat" autorisation="true" value ="true"></option><option class="etat" autorisation="false" value="false"></option></select></td>';
+          echo'<td>';
+          if($row['autorisation']=='true'){
+          echo'<select class="neutre" name="autorisation">';
+          echo'<option class="etat" autorisation="true" value ="true" selected="selected"></option>';
+          echo '<option class="etat" autorisation="false" value="false"></option></select></td>';
+          }
+          else{
+          echo'<select class="neutre" name="autorisation">';
+          echo'<option class="etat" autorisation="true" value ="true"></option>';
+          echo '<option class="etat" autorisation="false" value="false" selected="selected"></option></select></td>';
+          }
+          
             
           echo '<td><input type="date" name="date" id="date" value="'.$row['date'].'"></td>';
           
