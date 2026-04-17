@@ -20,9 +20,6 @@ if(isset($_GET['uid'])&&isset($_GET['nom'])&&isset($_GET['pin'])){
 	$date=date("Y-n-j");
 	$heure=date("H:i:s");
 
-	$sql="INSERT INTO test (heure,nom,uid,pin) VALUES ('$date','$nom','$uid','$pin')";
-	$dbh->query($sql);
-
 	$sql="SELECT * FROM tag WHERE id='$uid'";
 	$result=$dbh->query($sql);
 	if ($result->rowCount() == 0){
