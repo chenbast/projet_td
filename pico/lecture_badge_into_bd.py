@@ -85,7 +85,7 @@ def iso_to_timestamp(date_str):
 ADMIN_UID = "B3F28D1A" # Carte blanche : admin Elsa
 def add_user(uid):
 
-    rint("Pour enregistrer ce nouveau badge, badgez d'abord avec le badge ADMIN...")
+    print("Pour enregistrer ce nouveau badge, badgez d'abord avec le badge ADMIN...")
     led1.value(0)
     led2.value(1)
     led3.value(0)
@@ -293,6 +293,6 @@ while True:
                 if stat != rc522.OK:
                     break
                 sleep(0.1)
-            break
+            #break => est ce qu'on l'enlève car le programme s'arrête complétement et on ne pas rebadger un autre badge
 
     sleep(0.2)
