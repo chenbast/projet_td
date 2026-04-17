@@ -16,7 +16,7 @@
         $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
         $sql = "UPDATE detection SET `date` = '$new_date', heure = '$new_heure', autorisation = '$new_autorisation' WHERE num_detec = $numDetec";
         $result = $dbh->query($sql);
-        echo 'La détection n°'.$numDetec.' a bien été changé avec la date '.$new_date.', avec la date '.$new_heure.' et une autorisation'.$new_autorisation.'.';    
+        echo 'La détection n°'.$numDetec.' a bien été changé avec la date '.$new_date.', avec la date '.$new_heure.' et une autorisation '.$new_autorisation.'.';    
         
         ?> 
       <img height=80 src="images/fleche_retour.png">
