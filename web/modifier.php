@@ -15,7 +15,7 @@
     </nav>
     <div class="flex_horizontal">
     <h1>Modifier la ligne</h1>
-    
+    <br><br>
           <table id="tableBadges">
         <thead>
           <tr>
@@ -68,11 +68,12 @@
         } 
         echo'</table';     
         ?>
-        <br>
+        <br><br>
+    
+    <input class="recherche" type="submit"></form>
+    <br>
     <img height=80 src="images/fleche_retour.png">
     <a href="espace_admin.php">Retour</a>
-    
-    <input type="submit"></form>
     </form>
     </body>
     </div>

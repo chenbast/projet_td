@@ -29,7 +29,7 @@
         <br>
             <input class="date" type="date" name="date1" id="date1">
             <br>
-	        <input type="submit" value="Rechercher">
+	        <input class="recherche" type="submit" value="Rechercher">
         </form>
         <br><br>
         <form class = "flex_horizontal" method="post" action="nom.php" enctype="multipart/form-data">
@@ -49,7 +49,7 @@
                 ?>
             </select>
             <br>
-	        <input type="submit" value="Rechercher">
+	        <input class="recherche" type="submit" value="Rechercher">
   
         </form>
     </div>
