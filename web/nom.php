@@ -25,8 +25,16 @@
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
       <h1> Projet RFID</h1>
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
-    </div>
-        <table id="tableBadges">
+    </div class="flex_horizontal">
+    <?php
+    $nom=$_POST['nom'];
+    $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
+    $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE nom = ';
+    $sql = $sql."'".$nom."'";
+    $result = $dbh->query($sql);
+    echo "<p>Détections du badge de ".$nom." : <br><br></p>";
+
+        echo'<table id="tableBadges">
         <thead>
           <tr>
             <th>État du badge</th>
@@ -35,15 +43,8 @@
             <th>ID Badge</th>
             <th>Propriétaire</th>
           </tr>
-        </thead>
-    <?php
-    echo '<div class="flex_horizontal"';
-            $nom=$_POST['nom'];
-            $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
-            $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE nom = ';
-            $sql = $sql."'".$nom."'";
-            $result = $dbh->query($sql);
-            echo "<p>Détections du badge de ".$nom." : <br><br></p>";
+        </thead>';
+
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
           
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
@@ -59,9 +60,9 @@
                 echo '</tr>';
 
             }
-            
+            echo '</table>';
             echo'<img height=80 src="images/fleche_retour.png">
-            <a href="stats.php">Retour</a></div>';
+            <a href="stats.php">Retour</a>';
 
         ?>
     </body>

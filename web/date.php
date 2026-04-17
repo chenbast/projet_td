@@ -58,7 +58,7 @@
                 echo '</tr>';
 
             }
-
+            echo'</table>';
         ?>
         <img height=80 src="images/fleche_retour.png">
         <a href="stats.php">Retour</a> 

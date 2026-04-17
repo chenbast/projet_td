@@ -55,6 +55,7 @@
       
                 echo '</tr>';
             }
+            echo'</table>';
         }
         ?>
         </tbody>
