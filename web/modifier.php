@@ -13,9 +13,9 @@
       <a href="stats.php">Rechercher</a>
       <a href="connexion.php">Espace admin</a>
     </nav>
+    <div class="flex_horizontal">
     <h1>Modifier la ligne</h1>
     
-    <div class="flex_horizontal">
           <table id="tableBadges">
         <thead>
           <tr>
@@ -41,7 +41,7 @@
 
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td> <span class="etat" autorisation="'.$row['autorisation'].'"></span><select id="autorisation"><option class="etat" autorisation="true"></option><option class="etat" autorisation="false"></option></select></td>';
+          echo'<td> <span class="etat" autorisation="'.$row['autorisation'].'"></span><select name="autorisation"><option class="etat" autorisation="true" value ="true"></option><option class="etat" autorisation="false" value="false"></option></select></td>';
             
           echo '<td><input type="date" name="date" id="date" value="'.$row['date'].'"></td>';
           
@@ -54,13 +54,16 @@
           echo '<td class="jaune">Editer</td>';
 
           echo '</tr>';
-        }      
+        } 
+        echo'</table';     
         ?>
+        <br>
     <img height=80 src="images/fleche_retour.png">
     <a href="espace_admin.php">Retour</a>
-    </div>
-    <input type="submit"></form>
-    </body>
     
+    <input type="submit"></form>
+    </form>
+    </body>
+    </div>
     <script src="projet.js"></script>
 </html>

@@ -42,7 +42,7 @@
             $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE date = ';
             $sql = $sql."'".$date1."'";
             $result = $dbh->query($sql);
-            echo "Détections lors de la date ".$date1." : <br><br>";
+            echo "<p>Détections lors de la date ".$date1." : </p><br><br>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
           
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
