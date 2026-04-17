@@ -35,7 +35,6 @@ if (!isset($_SESSION['user_id'])) {
             <th>Heure de détection</th>
             <th>ID Badge</th>
             <th>Propriétaire</th>
-            <th>Détails</th>
             <th>Editer/supprimer</th>
           </tr>
         </thead>
@@ -58,8 +57,6 @@ if (!isset($_SESSION['user_id'])) {
           echo '<td>'.$row['id_tag'].'</td>';
           
           echo '<td>'.$row['nom'].'</td>';
-
-          echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
           echo '<td><a href="modifier.php?id='.$row['num_detec'].'"><img height=20 src="images/stylo.png"></a>';
 

@@ -10,7 +10,7 @@
     <nav id="navigation">
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
-      <a href="stats.php">Stats</a>
+      <a href="stats.php">Rechercher</a>
       <a href="espace_admin.php">Espace admin</a>
     </nav>
 
@@ -27,9 +27,6 @@
           <tr>
             <th>Numéro de détection</th>
             <th>État du badge</th>
-            <th>Date de détection</th></the>
-            <th>Heure de détection</th>
-            <th>ID Badge</th>
             <th>Propriétaire</th>
             <th>Détails</th>
           </tr>
@@ -45,12 +42,6 @@
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
           echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
-          
-          echo '<td>'.$row['date'].'</td>';
-          
-          echo '<td>'.$row['heure'].'</td>';
-
-          echo '<td>'.$row['id_tag'].'</td>';
           
           echo '<td>'.$row['nom'].'</td>';
 

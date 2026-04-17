@@ -10,7 +10,7 @@
     <nav id="navigation">
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
-      <a href="stats.php">Stats</a>
+      <a href="stats.php">Rechercher</a>
       <a href="connexion.php">Espace admin</a>
     </nav>
 
@@ -22,20 +22,20 @@
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
     
-        <form method="post" action="date.php" enctype="multipart/form-data">
+        <form class = "flex_horizontal" method="post" action="date.php" enctype="multipart/form-data">
         <p>
             <label for="date1">Rechercher par date :</label>
+        </p>
+        <br>
+            <input class="date" type="date" name="date1" id="date1">
             <br>
-            <input type="date" name="date1" id="date1">
-        </p>
-        <p>
 	        <input type="submit" value="Rechercher">
-        </p>
         </form>
-        
-        <form method="post" action="nom.php" enctype="multipart/form-data">
-        <p>
+        <br><br>
+        <form class = "flex_horizontal" method="post" action="nom.php" enctype="multipart/form-data">
+            <p>
             <label for="nom">Rechercher par nom :</label>
+            </p>
             <br>
             <select name="nom" id="nom">
                 <?php
@@ -48,11 +48,8 @@
                 }
                 ?>
             </select>
-
-        </p>
-        <p>
+            <br>
 	        <input type="submit" value="Rechercher">
-        </p>
   
         </form>
     </div>

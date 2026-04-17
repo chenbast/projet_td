@@ -10,7 +10,7 @@
     <nav id="navigation">
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
-      <a href="stats.php">Stats</a>
+      <a href="stats.php">Rechercher</a>
       <a href="connexion.php">Espace admin</a>
     </nav>
     <h1>Modifier la ligne</h1>
@@ -25,7 +25,6 @@
             <th>Heure de détection</th>
             <th>ID Badge</th>
             <th>Propriétaire</th>
-            <th>Détails</th>
             <th class="jaune">Editer/supprimer</th>
           </tr>
         </thead>
@@ -42,7 +41,7 @@
 
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
+          echo'<td input class="etat" type="text" name="autorisation" id="autorisation" value="'.$row['autorisation'].'"></td>';
             
           echo '<td><input type="date" name="date" id="date" value="'.$row['date'].'"></td>';
           
@@ -51,8 +50,6 @@
           echo '<td>'.$row['id_tag'].'</td>';
           
           echo '<td>'.$row['nom'].'</td>';
-
-          echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
           echo '<td class="jaune">Editer</td>';
 

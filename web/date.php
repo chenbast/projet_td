@@ -34,7 +34,6 @@
             <th>Heure de détection</th>
             <th>ID Badge</th>
             <th>Propriétaire</th>
-            <th>Détails</th>
           </tr>
         </thead>
     <?php
@@ -56,13 +55,13 @@
                 
                 echo '<td>'.$row['nom'].'</td>';
 
-                echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
-
                 echo '</tr>';
 
             }
 
         ?>
+        <img height=80 src="images/fleche_retour.png">
+        <a href="index.php">Retour</a> 
     </body>
     </div>
     <script src="projet.js"></script>

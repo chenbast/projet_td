@@ -58,6 +58,8 @@
         }
         ?>
         </tbody>
+            <img height=80 src="images/fleche_retour.png">
+            <a href="index.php">Retour</a>
 
     </table>
     </div>
