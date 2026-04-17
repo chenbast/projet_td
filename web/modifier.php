@@ -41,7 +41,7 @@
 
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td input class="etat" type="text" name="autorisation" id="autorisation" value="'.$row['autorisation'].'"></td>';
+          echo'<td> <span class="etat" autorisation="'.$row['autorisation'].'"></span><select id="autorisation"><option class="etat" autorisation="true"></option><option class="etat" autorisation="false"></option></select></td>';
             
           echo '<td><input type="date" name="date" id="date" value="'.$row['date'].'"></td>';
           

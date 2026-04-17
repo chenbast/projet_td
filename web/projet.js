@@ -1,5 +1,6 @@
 console.log('salut');
 let badges = document.querySelectorAll(".etat");
+let badges_modif = document.querySelectorAll(".etat_modif"); 
     
 function verifierBadge(numero) {
     let autorisation = badges[numero].getAttribute("autorisation");
@@ -9,6 +10,17 @@ function verifierBadge(numero) {
     } else {
         badges[numero].textContent = "Refusé";
         badges[numero].style.color = "red";
+    }
+}
+
+function modifierBadges(numero){
+    let valeur = badges_modif[numero].value; 
+    if (valeur == "true") {
+        badges_modif[numero].textContent = "Validé";
+        badges_modif[numero].style.color = "green";
+    } else {
+        badges_modif[numero].textContent = "Refusé";
+        badges_modif[numero].style.color = "red";
     }
 }
 for (let i = 0;i< badges.length; i++)  
