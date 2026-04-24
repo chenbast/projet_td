@@ -1,3 +1,2 @@
-Compte rendu (a copier coller sur word à la fin)
-
-Le but du projet est de détecter des badges à l'aide d'un capteur rfid, d'y transmettre sur un rasberry pico, de récuperer ces données grâce à Thonny et d'y envoyer vers une base de donnée SQL. De là nous pourront afficher les données sur un site Php.
+Projet Capteur RFID :
+Lorsque le capteur est branché à un pc et tourne avec le programme, lorsque on scanne un badge, on envoie des infos dans notre base de données. On envoie l'uid du badge, le nom du propriétaire, et le code pin rentré. Ensuite, ces données sont enregistrées et exploitées pour l'affichage sur une page web. Affichage de la date, heure, nom, UID et correspondance entre le code PIN rentré et celui qui appartient déjà au badge. Espace administrateur où nous pouvons modifier des lignes ou en supprimer.
