@@ -9,10 +9,12 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
     $result = $dbh->query($sql);
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         if($username==$row['id'] && $password==$row['mdp']){
+          //si les données correspondent, on démarre une session admin et on ouvre la page espace_admin.php
             session_start();
             $_SESSION['user_id'] = $row['id'];
             header('Location: espace_admin.php');
         } else{
+          //sinon on reste sur la page et on affiche un message d'erreur
             $message = 'Mauvais identifiant ou mot de passe';
         }
     }
@@ -28,7 +30,7 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
   </head>
   <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
+    <nav id="navigation"><!--  menu hamburger -->
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Rechercher</a>
@@ -38,6 +40,7 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
     <div id="pageflex">
     <h1>Connexion</h1>
 
+    <!--  affichage d'un message d'erreur si il faut -->
     <?php if (!empty($message)): ?>
         <p style="color:red"><?= $message ?></p>
     <?php endif; ?>
@@ -48,6 +51,7 @@ if (isset($_POST['identifiant']) && isset($_POST['mdp'])) {
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
 
+    <!-- formulaire pour rentrer identifiant et mot de passe -->
     <form class="flex_horizontal" method="post" action="connexion.php" enctype="multipart/form-data">
     <label for="identifiant">Identifiant :</label>
     <input class="connex" type="text" name="identifiant" id="identifiant">

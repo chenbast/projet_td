@@ -42,13 +42,16 @@
             $result = $dbh->query($sql);
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
                 echo'<tr><td>'.$row['num_detec'].'</td>';
-          
+
+                // Affichage de l'état, l'attribut personnalisé servira au javascript         
                 echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
                 
                 echo '<td>'.$row['date'].'</td>';
                 
                 echo '<td>'.$row['heure'].'</td>';
-      
+                
+                //on affiche en plus d'avant la date et l'heure de la détection
+
                 echo '<td>'.$row['id_tag'].'</td>';
                 
                 echo '<td>'.$row['nom'].'</td>';

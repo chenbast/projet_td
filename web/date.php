@@ -7,7 +7,7 @@
     </head>
     <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
+    <nav id="navigation"><!--  menu hamburger -->
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Rechercher</a>
@@ -37,6 +37,7 @@
           </tr>
         </thead>
     <?php
+            //récupération de la date à utliser das nos recherches
             $date1=$_POST['date1'];
             $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
             $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE date = ';
@@ -44,7 +45,8 @@
             $result = $dbh->query($sql);
             echo "<p>Détections lors de la date ".$date1." : </p><br><br>";
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-          
+
+                // Affichage de l'état, l'attribut personnalisé servira au javascript
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
                 
                 echo '<td>'.$row['date'].'</td>';

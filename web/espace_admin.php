@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+// lancer la connexion, en allant sur la page connexion.php
 if (!isset($_SESSION['user_id'])) {
     header('Location: connexion.php');
     exit;
@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id'])) {
   <body>
 
     <div id="pageflex">
-    <a href="deconnexion.php">Se déconnecter</a>
+    <a href="deconnexion.php">Se déconnecter</a><!-- fermer la session de l'utilisateur et le deconnecter de l'esapce admin -->
     <h1>Espace admin</h1>
     <div id="mainflex">
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid1">
@@ -58,6 +58,7 @@ if (!isset($_SESSION['user_id'])) {
           
           echo '<td>'.$row['nom'].'</td>';
 
+          //lien vers le form pour modifier certaines colonnes ou supprimer la ligne
           echo '<td><a href="modifier.php?id='.$row['num_detec'].'"><img height=20 src="images/stylo.png"></a>';
 
           echo '<a href="supprimer_ligne.php?id='.$row['num_detec'].'"><img height=20 src="images/croix-rouge.png"></a></td>';

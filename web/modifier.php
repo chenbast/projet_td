@@ -36,12 +36,13 @@
         $sql="SELECT * FROM detection d JOIN tag t ON d.id_tag=t.id WHERE num_detec=$id";
         $result = $dbh->query($sql);
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
+          //création d'un form afin de modifier les données
             
           echo '<form method="post" action="valider.php?id='.$row['num_detec'].'" enctype="multipart/form-data">';
 
           echo'<tr><td>'.$row['num_detec'].'</td>';
           
-          echo'<td>';
+          echo'<td>';//création d'un select pour le form avec 2 options dont une prédéfinie pour l'état de base de la détection
           if($row['autorisation']=='true'){
           echo'<select class="neutre" name="autorisation">';
           echo'<option class="etat" autorisation="true" value ="true" selected="selected"></option>';
@@ -62,7 +63,7 @@
           
           echo '<td>'.$row['nom'].'</td>';
 
-          echo '<td class="jaune">Editer</td>';
+          echo '<td class="jaune">Editer</td>';//création d'une classe 'jaune' pour savoir quoi faire avec le css
 
           echo '</tr>';
         } 

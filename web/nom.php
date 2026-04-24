@@ -7,7 +7,7 @@
     </head>
     <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
+    <nav id="navigation"><!--  menu hamburger -->
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Rechercher</a>
@@ -18,6 +18,7 @@
     <div id="pageflex">
       
     <?php
+    //on récupère le nom a chercher
       echo '<h1>Détection de '.$_POST['nom'].'</h1>';
     ?>
     
@@ -29,11 +30,12 @@
     <?php
     $nom=$_POST['nom'];
     $dbh=new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
+
     $sql='SELECT * FROM detection d JOIN tag t ON t.id = d.id_tag WHERE nom = ';
     $sql = $sql."'".$nom."'";
     $result = $dbh->query($sql);
     echo "<p>Détections du badge de ".$nom." : <br><br></p>";
-
+        //créatio du tableau pour afficher les données
         echo'<table id="tableBadges">
         <thead>
           <tr>
@@ -44,9 +46,9 @@
             <th>Propriétaire</th>
           </tr>
         </thead>';
-
+            //affichage des données
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-          
+              
                 echo'<tr><td class="etat" autorisation="'.$row['autorisation'].'"></td>';
                 
                 echo '<td>'.$row['date'].'</td>';

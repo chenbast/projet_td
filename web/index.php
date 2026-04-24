@@ -7,7 +7,7 @@
   </head>
   <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
+    <nav id="navigation"><!--  menu hamburger -->
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Rechercher</a>
@@ -22,7 +22,7 @@
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
 
-    <table id="tableBadges">
+    <table id="tableBadges"><!-- début du tableau -->
         <thead>
           <tr>
             <th>Numéro de détection</th>
@@ -39,12 +39,15 @@
         $sql="SELECT * FROM detection d JOIN tag t ON d.id_tag=t.id";
         $result = $dbh->query($sql);
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
+          //affichage des différentes données sur chaque ligne
           echo'<tr><td>'.$row['num_detec'].'</td>';
-          
+         
+           // Affichage de l'état, l'attribut personnalisé servira au javascript
           echo'<td class="etat" autorisation="'.$row['autorisation'].'"></td>';
           
           echo '<td>'.$row['nom'].'</td>';
 
+          //création d'un lien pour afficher plus de détails sur la détection
           echo '<td><a href="details.php?num_detec='.$row['num_detec'].'">Plus de détails</a></td>';
 
           echo '</tr>';

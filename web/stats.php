@@ -7,7 +7,7 @@
     </head>
     <body>
     <img class="icons" id="menu" src="images/menu.png" alt="image_menu">
-    <nav id="navigation">
+    <nav id="navigation"><!--  menu hamburger -->
       <img class="icons" id="croix" src="images/croix.png" alt="image_croix">
       <a href="index.php">Accueil</a>
       <a href="stats.php">Rechercher</a>
@@ -22,7 +22,7 @@
       <img class="img_rfid" src="images\rfid.png" alt="sticker rfid2">
     </div>
     
-        <form class = "flex_horizontal" method="post" action="date.php" enctype="multipart/form-data">
+        <form class = "flex_horizontal" method="post" action="date.php" enctype="multipart/form-data"><!--  création du form pour rechercher par date -->
         <p>
             <label for="date1">Rechercher par date :</label>
         </p>
@@ -32,7 +32,7 @@
 	        <input class="recherche" type="submit" value="Rechercher">
         </form>
         <br><br>
-        <form class = "flex_horizontal" method="post" action="nom.php" enctype="multipart/form-data">
+        <form class = "flex_horizontal" method="post" action="nom.php" enctype="multipart/form-data"><!--  création du form pour rechercher par nom -->
             <p>
             <label for="nom">Rechercher par nom :</label>
             </p>
@@ -45,6 +45,7 @@
                 $result = $dbh->query($sql);
                 while($row = $result->fetch(PDO::FETCH_ASSOC)){
                     echo '<option value="'.$row['nom'].'">'.$row['nom'].'</option>';
+                    //affichage et selection de noms existants dans la base de donnée pour rechercher des détéctions
                 }
                 ?>
             </select>

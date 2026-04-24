@@ -18,7 +18,7 @@ if (ini_get("session.use_cookies")) {
 // Finalement, détruire la session.
 session_destroy();
 
-// Rediriger vers la page de connexion.
+// Rediriger vers l'index du projet'.
 header('Location: index.php');
 exit;
 

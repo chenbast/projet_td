@@ -16,6 +16,7 @@
     
     <div class="flex_horizontal">
     <?php
+    //on obtient l'id de la detection à supprimer grace au GET dans le lien php
         $numDetec = $_GET['id'];
         $dbh = new PDO('mysql:dbname=projet_rfid;host=localhost;charset=utf8', 'root', '');
         $result = $dbh->query("DELETE FROM detection WHERE num_detec = $numDetec");
